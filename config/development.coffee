@@ -2,12 +2,15 @@
 # webpack配置
 #
 
+path = require 'path'
+
 webpack = require 'webpack'
 HtmlWebpackPlugin = require 'html-webpack-plugin'
 
-__base = process.cwd()
+cwd = process.cwd()
+base = path.resolve __dirname + '/..'
 
-config = require __base + '/config'
+config = require cwd + '/config'
 
 process.env.NODE_ENV = 'development'
 
@@ -15,20 +18,22 @@ module.exports =
   devtool: 'eval'
   debug: true
   entry: [
-    './app/router.cjsx'
-    'webpack/hot/dev-server'
+    cwd + '/app/router.cjsx'
+    base + '/node_modules/webpack/hot/dev-server.js'
   ]
   output:
-    path: __base + '/build'
+    path: cwd + '/build'
     filename: '[hash].js'
   resolve:
     root: [
-      __base + '/app'
-      __base + '/bower_components'
-      __base + '/node_modules'
-      __base
+      cwd + '/app'
+      cwd + '/bower_components'
+      cwd + '/node_modules'
+      cwd
     ]
     extensions: ['', '.js', '.cjsx', '.coffee']
+  resolveLoader:
+    root: base + '/node_modules'
   module:
     loaders: [
       test: /\.coffee$/
@@ -58,7 +63,7 @@ module.exports =
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin "bower.json", ["main"]
     )
     new HtmlWebpackPlugin
-      template: __base + '/index.html'
+      template: cwd + '/index.html'
       title: config.title
     new webpack.HotModuleReplacementPlugin
   ]
