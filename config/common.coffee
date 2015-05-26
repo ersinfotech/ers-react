@@ -57,4 +57,9 @@ module.exports =
       template: cwd + '/index.html'
       title: config.title
       config: config
+    new HtmlWebpackPlugin
+      filename: 'login.html'
+      template: cwd + '/login.html'
+      title: config.title
+      config: config
   ]
