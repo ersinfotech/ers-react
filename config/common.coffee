@@ -33,17 +33,29 @@ module.exports =
       test: /\.cjsx$/
       loader: 'coffee!cjsx'
     ,
-      test: /\.css$/
-      loader: 'style!css'
-    ,
-      test: /\.(jpe?g|png|gif|svg)$/i
-      loader: 'file'
-    ,
-      test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/
-      loader: "file"
-    ,
       test: /\.styl$/
       loader: 'style!css!stylus'
+    ,
+      test: /assets\//
+      loader: 'file?name=[path][name].[ext]'
+    ,
+      test: /\.css/
+      loader: 'style!css'
+      exclude: [
+        cwd + '/assets'
+      ]
+    ,
+      test: /\.(jpe?g|png|gif|svg)/i
+      loader: 'file'
+      exclude: [
+        cwd + '/assets'
+      ]
+    ,
+      test: /\.(ttf|eot|svg|woff|woff2)/
+      loader: "file"
+      exclude: [
+        cwd + '/assets'
+      ]
     ]
   plugins: [
     new webpack.NoErrorsPlugin

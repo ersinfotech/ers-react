@@ -12,7 +12,6 @@ var config = require(cwd + '/config');
 
 var compiler = webpack(webpackConfig);
 var server = new WebpackDevServer(compiler, {
-  hot: true,
-  contentBase: './build'
+  hot: true
 });
 server.listen(config.port);
